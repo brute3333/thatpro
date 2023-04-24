@@ -22,8 +22,6 @@ public abstract class Command {
     public static Command create(String instruction) {
         String[] args = instruction.toLowerCase().trim().split(" ");
         switch (args[0]){
-           case "quit":
-               return new QuitCommand();
 
             case "dump":
                 return new DumpCommand();

@@ -2,7 +2,7 @@ package za.co.wethinkcode.robotworlds.client;
 
 import java.net.*;
 import java.io.*;
-import java.util.Scanner;
+
 
 
 public class SimpleClient {
@@ -15,14 +15,23 @@ public class SimpleClient {
         )
         {
             String clientMessageToServer= "";
-            while (!(clientMessageToServer = new Scanner(System.in).nextLine()).equalsIgnoreCase("quit")) {
+            String serverMessageFromClient = "";
+            System.out.println("Hey Champ! to play the game enter the following command:\nlaunch <robotMake> <robotName>");
+            GameClient  gameclient = new GameClient();
+
+            while (true) {
+                clientMessageToServer =gameclient.getInputMessage();
+                HandlingRequests incoming_requests = new HandlingRequests();
+                incoming_requests.setValues(clientMessageToServer);
+                out.println(incoming_requests.request(incoming_requests.request(serverMessageFromClient)));
                 out.println(clientMessageToServer);
                 out.flush();
-                String messageFromServer = in.readLine();
-                System.out.println("Response: " + messageFromServer);
-                if (clientMessageToServer == "quit") {
-                    System.out.println("shutting down "+socket.getInetAddress()+ "at port " +socket.getPort());
 
+                serverMessageFromClient = in.readLine();
+                gameclient.printMessage(serverMessageFromClient);
+
+                if (clientMessageToServer.equalsIgnoreCase("exit")) {
+                    break;
                 }
             }
 

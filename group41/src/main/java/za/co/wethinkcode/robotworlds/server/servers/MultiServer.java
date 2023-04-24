@@ -13,7 +13,7 @@ public class MultiServer {
         try (
                 ServerSocket serverSocket = new ServerSocket(PORT);
         ) {
-            System.out.println("Server running & waiting for client connections.");
+            System.out.println("Hey WeThinkCoder_ the RobotWorlds server is currently running\nConnect to the server by running the  SimpleClient Class.");
             while (true) {
                 Socket socket = serverSocket.accept();
                 pool.execute(new SimpleServer(socket));
